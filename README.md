@@ -10,7 +10,7 @@ Additional links:
 
 * [Weaviate documentation](https://www.semi.technology/developers/weaviate/current/)
 * [Weaviate on Github](https://github.com/semi-technologies/weaviate)
-* [Complete english language WikiPedia vectorized in Weaviate (project)](#)
+* [Complete english language WikiPedia vectorized in Weaviate (similar project)](https://github.com/semi-technologies/semantic-search-through-Wikipedia-with-Weaviate)
 
 ### Stats
 
@@ -33,16 +33,17 @@ You can import the data yourself in two ways: by running the python script inclu
 
 ### Import using Python
 
-```
+```sh
 $ wget https://dl.fbaipublicfiles.com/starspace/fb15k.tgz
 $ gzip -d fb15k.tgz
+$ pip3 install -f requirements.txt
 $ docker-compose up -d
 $ python3 import.py
 ```
 
 The import takes a few hours, so probably you want to do something like:
 
-```
+```sh
 $ nohup python3 -u import.py &
 ```
 
@@ -54,7 +55,7 @@ Note:
 
 You can download a backup and restore it.
 
-```
+```sh
 $ wget 
 $ gzip -d backup
 $ docker-compose up -d
