@@ -14,15 +14,14 @@ Additional links:
 
 ### Stats
 
-```
-Data objects imported: 78.404.883
-Import time: 
-Machine: 
-Weaviate version:
-Dataset size:
-Diskspace for Weaviate needed: 
-Average query time for 25 nearest neighbors: 
-```
+| description | value |
+| --- | --- |
+| Data objects imported | `78.404.883` |
+| Import time | `...` |
+| Machine | `...` | 
+| Weaviate version | `v1.7.2` |
+| Dataset size | 113GB
+| Average query time for 25 nearest neighbors | `...` |
 
 Note:
 
