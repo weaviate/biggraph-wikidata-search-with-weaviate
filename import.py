@@ -152,8 +152,8 @@ def create_data_objects():
                 None,
                 weaviate_import_object[2]
             )
-            # if batch has size of 10k add them
-            if count % 10000 == 0:
+            # if batch has size of 1k add them
+            if count % 1000 == 0:
                 CLIENT.batch.create_objects()
                 logger.info("Imported: " + str(count) + " items")
         # add last in batch
