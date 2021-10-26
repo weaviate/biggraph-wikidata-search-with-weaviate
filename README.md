@@ -20,7 +20,7 @@ Additional links:
 | Import time | `...` |
 | Machine | `...` | 
 | Weaviate version | `v1.7.2` |
-| Dataset size | 113GB
+| Dataset size | `113GB` |
 | Average query time for 25 nearest neighbors | `...` |
 
 Note:
@@ -31,7 +31,7 @@ Note:
 
 You can import the data yourself in two ways: by running the python script included in this repo _or_ by importing a Weaviate backup.
 
-#### Import using Python
+### Import using Python
 
 ```
 $ wget https://dl.fbaipublicfiles.com/starspace/fb15k.tgz
@@ -50,7 +50,7 @@ Note:
 
 * The script assumes that the tsv file is called: `wikidata_translation_v1.tsv`
 
-#### Restore as Weaviate backup
+### Restore as Weaviate backup
 
 You can download a backup and restore it.
 
