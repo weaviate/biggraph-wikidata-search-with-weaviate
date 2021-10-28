@@ -12,6 +12,11 @@ Additional links:
 * [Weaviate on Github](https://github.com/semi-technologies/weaviate)
 * [Complete english language WikiPedia vectorized in Weaviate (similar project)](https://github.com/semi-technologies/semantic-search-through-Wikipedia-with-Weaviate)
 
+### Acknowledgments
+
+* The folks from [Facebook Research](https://github.com/facebookresearch) who trained the PBG
+* Thanks to the team of [Obsei](https://github.com/obsei/obsei) for sharing the idea on our [Slack](https://join.slack.com/t/weaviate/shared_invite/zt-goaoifjr-o8FuVz9b1HLzhlUfyfddhw) channel
+
 ### Stats
 
 | description | value |
