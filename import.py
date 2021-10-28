@@ -144,7 +144,11 @@ def create_data_objects():
             if count == 1:
                 continue
             line_obj = parse_line_to_object(line)
-            weaviate_import_object = create_weaviate_import_obj(line_obj)
+            try:
+                weaviate_import_object = create_weaviate_import_obj(line_obj)
+            except:
+                logger.info("Something went wrong creating the object")
+                continue
             # do batch import
             CLIENT.batch.add_data_object(
                 weaviate_import_object[0],
@@ -153,8 +157,12 @@ def create_data_objects():
                 weaviate_import_object[2]
             )
             # if batch has size of 1k add them
-            if count % 1000 == 0:
-                CLIENT.batch.create_objects()
+            if count % 250 == 0:
+                try:
+                    CLIENT.batch.create_objects()
+                except:
+                    logger.info("Something went wrong with th batch")
+                    pass
                 logger.info("Imported: " + str(count) + " items")
         # add last in batch
         CLIENT.batch.create_objects()

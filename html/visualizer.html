@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Demo of PyTorch-BigGraph search with the Weaviate vector search engine">
+    <meta name="author" content="SeMI Technologies">
+    <title>PyTorch BigGraph search with Weaviate</title>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i,400,400i,500,500i,700,700i" rel=stylesheet>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="./style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+            <span class="navbar-brand">PyTorch BigGraph search with Weaviate</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://www.semi.technology/developers/weaviate/current/">Weaviate docs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://github.com/semi-technologies/weaviate">Weaviate Github</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://github.com/facebookresearch/PyTorch-BigGraph">PyTorch BigGraph Github</a>
+                </li>
+                </ul>
+                <form class="d-flex">
+                <input id="search-bar" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="Q2001">
+                <button class="btn btn-outline-success" type="button" id="exec-search">Search</button>
+                </form>
+            </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><a href="https://github.com/facebookresearch/PyTorch-BigGraph">PyTorch-BigGraph</a> is a project by <a href="https://research.fb.com/">Facebook Research</a> and a "distributed system for learning graph embeddings for large graphs" which -in turn- is based on the <a href="https://mlsys.org/Conferences/2019/doc/2019/71.pdf">PyTorch-BigGraph: A Large-scale Graph Embedding Framework paper</a>. As an example dataset, they <a href="https://github.com/facebookresearch/PyTorch-BigGraph#pre-trained-embeddings">trained a PBG model on the full Wikidata graph</a>.</p>
+                    <p>In this demo, you can search through the entire dataset​ (78M objects and vectors)​ by selecting a Entity ID from the Wikidata set and searching for it on the right top of this page. The service does a similarity search in Weaviate and collects the images from the Wikidata API. It will also show the relevant GraphQL queries where possible. You can also run the setup yourself via <a href="https://github.com/semi-technologies/PyTorch-BigGraph-search-with-Weaviate">this</a> Github repo.</p>
+                    <p>If you like what you see, a <g-emoji class="g-emoji" alias="star" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png">⭐</g-emoji> on the <a href="https://github.com/semi-technologies/weaviate/stargazers">Weaviate Github repo</a> is appreciated.</p>
+                </div>
+                <hr>
+            </div>
+            <!-- 404 -->
+            <div class="row 404" style="display: none;">
+                <div class="col-md-12 text-center">
+                    <p>Did you select a proper Entity ID? Like <a href="https://www.wikidata.org/wiki/Q80938" target="_blank"><code>Q80938</code></a></p>
+                    <p><img src="./404.gif"></p>
+                </div>
+                <hr>
+            </div>
+            <!-- Three columns of text below the infobox -->
+            <div class="row">
+                <div class="col-md-4 text-center nn-result" id="first-result" style="display: none;">
+                    <div class="border rounded" style="margin-bottom: 1rem; padding: 0.5rem;">
+                        <div class="bd-placeholder-img rounded center-cropped" width="160" height="160" role="img"></div>
+                        <h3 style="text-transform: capitalize;">Heading</h3>
+                        <p><small>Q</small></p>
+                        <p><div class="progress"><div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div></div></p>
+                        <p><a class="btn btn-secondary btn-nn" href="#">Nearest Neighbors</a>
+                        <a class="btn btn-secondary btn-gql" href="#" target="_blank">Weaviate GraphQL</a></p>
+                    </div>
+                </div><!-- /.col-lg-4 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        // change to the correct Weaviate URL
+        var weaviate_url = "http://35.239.235.103:8080"
+    </script>
+    <script src="./script.js"></script>
+  </body>
+</html>
