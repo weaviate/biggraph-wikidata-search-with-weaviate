@@ -34,8 +34,8 @@ You can import the data yourself in two ways: by running the python script inclu
 ### Import using Python
 
 ```sh
-$ wget https://dl.fbaipublicfiles.com/starspace/fb15k.tgz
-$ gzip -d fb15k.tgz
+$ wget https://dl.fbaipublicfiles.com/torchbiggraph/wikidata_translation_v1.tsv.gz
+$ gzip -d wikidata_translation_v1.tsv.gz
 $ pip3 install -f requirements.txt
 $ docker-compose up -d
 $ python3 import.py
