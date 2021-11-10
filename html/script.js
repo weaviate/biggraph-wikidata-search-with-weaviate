@@ -176,6 +176,11 @@ var showContent = function(results, similaritySearchQuery){
                 box.find("h3").text(results[i]["label"]);
                 box.find("small").html('<a href="' + i + '" target="_blank">' + getEntityId(i).substring(3) + '</a>');
                 box.find(".bd-placeholder-img").css("background-image", "url('" + results[i]["image"] + "')");
+                if(results[i]["image"] == ""){
+                    box.find(".bd-placeholder-img").css("background-image", "url('https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg')");
+                } else {
+                    box.find(".bd-placeholder-img").css("background-image", "url('" + results[i]["image"] + "')");
+                }
                 box.find(".progress-bar").css("width", certainty + "%");
                 box.find(".progress-bar").attr("aria-valuenow", certainty);
                 box.find(".progress-bar").text("certainty: " + Math.round(certainty * 100) / 100 + "%");
@@ -207,8 +212,8 @@ var makeSimilarityGraphqlQuery = function(q) {
 }
 
 var makeEntrySparqlQuery = function(qs) {
-    // qs structured like: wd:Q1 wd:Q221392 wd:Q497745 etc
-    return encodeURIComponent('SELECT ?item ?itemLabel ?class ?classLabel ?projectLabel WHERE {\n VALUES ?item { ' + qs + ' }\n ?item wdt:P31 ?class;\n wdt:P18 ?project.\n SERVICE wikibase:label { bd:serviceParam wikibase:language "en,en". } }')
+    qs = qs.replaceAll(">_reverse_relatio", "");
+    return encodeURIComponent('SELECT ?item ?itemLabel ?class ?classLabel ?projectLabel WHERE {\n VALUES ?item { ' + qs + ' }\n OPTIONAL { \n ?item wdt:P31 ?class;\n wdt:P18 ?project.\n } \n SERVICE wikibase:label { bd:serviceParam wikibase:language "en,en". } }')
 }
 
 var getGraphql = function(q, cb) {
@@ -227,6 +232,8 @@ var getGraphql = function(q, cb) {
 var getSparql = function(q, cb) {
     $.get( wikidata_url + q, function( result ) {
         cb(result);
+    }).fail(function() {
+        showNullResults();
     });
 }
 
@@ -246,7 +253,6 @@ var getFromSparqlResult = function(needle, haystack){
             return ""
         case "label":
             for (let i = 0; i < haystack.binding.length; i++) {
-                // console.log(haystack.binding[i])
                 if(haystack.binding[i]["@name"] == "itemLabel"){
                     return haystack.binding[i]["literal"]["#text"]
                 }
@@ -291,23 +297,27 @@ var addDistance = function(XMLresult, GraphQLresult){
 
 var showResults = function(result){
     $(result.data.Get.Entity).each(function() {
-        var similaritySearchQuery = makeSimilarityGraphqlQuery(this._additional.id)
+        var similaritySearchQuery = makeSimilarityGraphqlQuery(this._additional.id);
+        handleLoader('Do a similarity match in Weaviate');
         getGraphql(similaritySearchQuery, function(result){
             var entityArray = "";
             $(result.data.Get.Entity).each(function() {
                 entityArray += (getEntityId(this.url)) + " ";
             })
-            var sparqlQuery = makeEntrySparqlQuery(entityArray)
+            var sparqlQuery = makeEntrySparqlQuery(entityArray);
+            handleLoader('Find meta-data and images from Wikidata');
             getSparql(sparqlQuery, function(XMLresult){
                 var parsedResultsXml = parseXML(XMLresult);
                 var parsedResults = addDistance(parsedResultsXml, result);
                 showContent(parsedResults, similaritySearchQuery);
+                $("#loader").hide();
             })
         })
     });
 }
 
 var showNullResults = function(){
+    $("#loader").hide();
     $(".404").show();
 }
 
@@ -317,6 +327,7 @@ var doSearch = function(q){
     $("#search-bar").val(q);
     $(".404").hide();
     $(".nn-result").hide();
+    handleLoader('Find the vector position for this ID in Weaviate');
     getGraphql(getEntryQuery, function(result){
         if(result.data.Get.Entity.length === 0){
             showNullResults();
@@ -326,7 +337,13 @@ var doSearch = function(q){
     });
 }
 
+function handleLoader(text){
+    $("#loader").show();
+    $("#loader").find(".loader-info").text(text);
+}
+
 $(document).ready(function() {
+    $("#loader").hide();
     $("#exec-search").click(function(e){
         doSearch($("#search-bar").val());
         e.preventDefault();

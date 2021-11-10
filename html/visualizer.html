@@ -42,16 +42,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p><a href="https://github.com/facebookresearch/PyTorch-BigGraph">PyTorch-BigGraph</a> is a project by <a href="https://research.fb.com/">Facebook Research</a> and a "distributed system for learning graph embeddings for large graphs" which -in turn- is based on the <a href="https://mlsys.org/Conferences/2019/doc/2019/71.pdf">PyTorch-BigGraph: A Large-scale Graph Embedding Framework paper</a>. As an example dataset, they <a href="https://github.com/facebookresearch/PyTorch-BigGraph#pre-trained-embeddings">trained a PBG model on the full Wikidata graph</a>.</p>
-                    <p>In this demo, you can search through the entire dataset​ (78M objects and vectors)​ by selecting a Entity ID from the Wikidata set and searching for it on the right top of this page. The service does a similarity search in Weaviate and collects the images from the Wikidata API. It will also show the relevant GraphQL queries where possible. You can also run the setup yourself via <a href="https://github.com/semi-technologies/PyTorch-BigGraph-search-with-Weaviate">this</a> Github repo.</p>
-                    <p>If you like what you see, a <g-emoji class="g-emoji" alias="star" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png">⭐</g-emoji> on the <a href="https://github.com/semi-technologies/weaviate/stargazers">Weaviate Github repo</a> is appreciated.</p>
+                    <p>📝 <strong>About the research:</strong> <a href="https://github.com/facebookresearch/PyTorch-BigGraph">PyTorch-BigGraph</a> is a project by <a href="https://research.fb.com/">Facebook Research</a> and a "distributed system for learning graph embeddings for large graphs" which -in turn- is based on the <a href="https://mlsys.org/Conferences/2019/doc/2019/71.pdf">PyTorch-BigGraph: A Large-scale Graph Embedding Framework paper</a>.</p>
+                    <p>💾 <strong>About the dataset:</strong> The complete BigGraph Wikidata-dataset for Weaviate and how to import it can be found <a href="https://github.com/semi-technologies/biggraph-wikidata-search-with-weaviate">here</a> on Github.</p>
+                    <p>🔍 <strong>About the vector search engine:</strong> <a href="https://www.semi.technology/developers/weaviate/current/">Weaviate</a> is an open source vector search engine used to render the results based on the dataset mentioned above.</p>
+                    <p>💻 <strong>About the demo:</strong> In this demo, you can search through the entire dataset​ (<strong>78M objects and vectors</strong>)​ by selecting a <strong>Wikidata Entity ID</strong> from the Wikidata set and searching for it on the <strong>right top of this page</strong>. The service does a similarity search in Weaviate and collects the images from the Wikidata API. It will also show the relevant GraphQL queries where possible. You can also run the setup yourself via <a href="https://github.com/semi-technologies/PyTorch-BigGraph-search-with-Weaviate">this</a> Github repo.</p>
+                    <p>⭐ If you like what you see, a +1 on the <a href="https://github.com/semi-technologies/weaviate/stargazers">Weaviate Github repo</a> is appreciated.</p>
                 </div>
                 <hr>
+                <div class="text-center" id="loader">
+                    <div class="spinner-border text-success" role="status"></div>
+                    <div class="loader-info"></div>
+                </div>
             </div>
             <!-- 404 -->
             <div class="row 404" style="display: none;">
                 <div class="col-md-12 text-center">
-                    <p>Did you select a proper Entity ID? Like <a href="https://www.wikidata.org/wiki/Q80938" target="_blank"><code>Q80938</code></a></p>
+                    <p>Did you set a proper Entity ID? Like <a href="https://www.wikidata.org/wiki/Q80938" target="_blank"><code>Q80938</code></a></p>
                     <p><img src="./404.gif"></p>
                 </div>
                 <hr>
@@ -75,7 +81,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         // change to the correct Weaviate URL
-        var weaviate_url = "http://biggraph-wikidata.api.demo.vectors.network:8080"
+        var weaviate_url = "http://biggraph-wikidata.api.vectors.network:8080"
     </script>
     <script src="./script.min.js"></script>
   </body>
