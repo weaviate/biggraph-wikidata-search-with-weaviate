@@ -28,7 +28,6 @@ Additional links:
 | Machine | `16 CPU, 128Gb Mem` | 
 | Weaviate version | `v1.8.0-rc.3` |
 | Dataset size | `125G` |
-| Average query time for 25 nearest neighbors | `...` |
 
 Note:
 
@@ -68,7 +67,7 @@ Note:
 
 ### Restore as Weaviate backup
 
-You can download a backup and restore it. This is by far the fastest way to get the dataset up and running
+You can download a backup and restore it. **This is by far the fastest way to get the dataset up and running ⁉️**
 
 ```sh
 # download the Weaviate backup
