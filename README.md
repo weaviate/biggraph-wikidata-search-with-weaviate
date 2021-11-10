@@ -1,4 +1,4 @@
-# PyTorch-BigGraph search with the Weaviate vector search engine
+# PyTorch-BigGraph Wikidata search with the Weaviate vector search engine
 
 [PyTorch-BigGraph](https://github.com/facebookresearch/PyTorch-BigGraph) is a project by [Facebook Research](https://research.fb.com/) and a "distributed system for learning graph embeddings for large graphs" which -in turn- is based on the [PyTorch-BigGraph: A Large-scale Graph Embedding Framework paper](https://mlsys.org/Conferences/2019/doc/2019/71.pdf). As an example dataset, they [trained a PBG model on the full Wikidata graph](https://github.com/facebookresearch/PyTorch-BigGraph#pre-trained-embeddings).
 
@@ -11,6 +11,9 @@ Additional links:
 * [Weaviate documentation](https://www.semi.technology/developers/weaviate/current/)
 * [Weaviate on Github](https://github.com/semi-technologies/weaviate)
 * [Complete english language WikiPedia vectorized in Weaviate (similar project)](https://github.com/semi-technologies/semantic-search-through-Wikipedia-with-Weaviate)
+* [🔥 Live Demo Weaviate Endpoint 🔥](http://biggraph-wikidata.api.demo.vectors.network:8080)
+* [🔥 Live Demo HTML front-end 🔥](http://biggraph-wikidata.demo.vectors.network.vectors.network)
+* [🔥 Live Demo Weaviate GraphQL front-end 🔥](#)
 
 ### Acknowledgments
 
@@ -31,11 +34,19 @@ Note:
 
 * This dataset is indexed on a single Weaviate node to show the capabilities of a single Weaviate instance. You can also set up a [Weaviate Kubernetes cluster](https://www.semi.technology/developers/weaviate/current/getting-started/installation.html#kubernetes-k8s) and import the complete dataset in that way.
 
+## Index
+
+* Import
+    * Import using Python from source
+    * Restore as Weaviate backup
+* Example queries
+* Video
+
 ## Import
 
 You can import the data yourself in two ways: by running the python script included in this repo _or_ by restoring a [Weaviate backup](#restore-as-weaviate-backup) (this is the fastest!).
 
-### Import using Python
+### Import using Python from source
 
 ```sh
 $ wget https://dl.fbaipublicfiles.com/torchbiggraph/wikidata_translation_v1.tsv.gz
@@ -86,7 +97,3 @@ A bunch of example queries.
 ## Video
 
 [VIDEO]
-
-## HTML Frontend
-
-You can find the public frontend [here](#). If you want to run it yourself, change `weaviate_url` in [visualizer.html](/html/visualizer.html#L79).
