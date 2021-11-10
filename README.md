@@ -26,7 +26,7 @@ Additional links:
 | --- | --- |
 | Data objects imported | `78.404.883` |
 | Machine | `16 CPU, 128Gb Mem` | 
-| Weaviate version | `v1.8.0-rc.3` |
+| Weaviate version | `v1.8.0-rc.2` |
 | Dataset size | `125G` |
 
 Note:
