@@ -121,6 +121,26 @@ Finding Stanley...
 }
 ```
 
+Show those vectors!
+
+```graphql
+{
+  Get {
+    Entity(
+      nearObject: {id: "72784488-d8a9-4fa5-8c5c-208465a31fe2", certainty: 0.75}
+      limit: 3
+    ) {
+      url
+      _additional {
+        id
+        certainty
+        vector
+      }
+    }
+  }
+}
+```
+
 ## Video
 
 [VIDEO]
