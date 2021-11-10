@@ -22,10 +22,9 @@ Additional links:
 | description | value |
 | --- | --- |
 | Data objects imported | `78.404.883` |
-| Import time | `...` |
-| Machine | `...` | 
-| Weaviate version | `v1.7.2` |
-| Dataset size | `113GB` |
+| Machine | `8 CPU, 128Gb Mem` | 
+| Weaviate version | `v1.8.0-rc.3` |
+| Dataset size | `125G` |
 | Average query time for 25 nearest neighbors | `...` |
 
 Note:
@@ -34,7 +33,7 @@ Note:
 
 ## Import
 
-You can import the data yourself in two ways: by running the python script included in this repo _or_ by importing a Weaviate backup.
+You can import the data yourself in two ways: by running the python script included in this repo _or_ by restoring a [Weaviate backup](#restore-as-weaviate-backup) (this is the fastest!).
 
 ### Import using Python
 
@@ -58,17 +57,26 @@ Note:
 
 ### Restore as Weaviate backup
 
-You can download a backup and restore it.
+You can download a backup and restore it. This is by far the fastest way to get the dataset up and running
 
 ```sh
-$ wget 
-$ gzip -d backup
+# download the Weaviate backup
+$ curl https://storage.googleapis.com/semi-technologies-public-data/weaviate-1.8.0-rc.2-backup-wikipedia-pytorch-biggraph.tar.gz -O
+# untar the backup (125G unpacked)
+$ tar -xvzf weaviate-1.8.0-rc.2-backup-wikipedia-pytorch-biggraph.tar.gz
+# get the unpacked directory
+$ echo $(pwd)/var/weaviate
+# use the above result (e.g., /home/foobar/weaviate-disk/var/weaviate)
+#   update volumes in docker-compose.yml (NOT PERSISTENCE_DATA_PATH!) to the above output
+#   (e.g., PERSISTENCE_DATA_PATH: '/home/foobar/weaviate-disk/var/weaviate:/var/lib/weaviate')
+#   With 16 CPUs this process takes about 12 to 15 minutes
+# start the container
 $ docker-compose up -d
 ```
 
 Notes:
 
-* Weaviate needs some time to restore the backup, in the docker logs, you can see the status of the import
+* Weaviate needs some time to restore the backup, in the docker logs, you can see the status of the import. For more verbose information regarding the import. Add `LOG_LEVEL: 'debug'` in `docker-compose.yml`
 * This setup is tested with `Ubuntu 20.04.3 LTS` and the Weaviate version in the Docker-compose file attached
 
 ## Example queries
@@ -78,3 +86,7 @@ A bunch of example queries.
 ## Video
 
 [VIDEO]
+
+## HTML Frontend
+
+You can find the public frontend [here](#). If you want to run it yourself, change `weaviate_url` in [visualizer.html](/html/visualizer.html#L79).

@@ -2,6 +2,7 @@
 This import file, imports the PyTorch-BigGraph dataset from facebookresearch to a Weaviate
 """
 import weaviate
+import time
 from loguru import logger
 
 def create_weaviate_schema():
@@ -136,6 +137,8 @@ def create_data_objects():
     Creates data object inside a Weaviate using batch
     """
 
+    global BATCH_SIZE
+
     with open(WIKI_DATA_FILE, encoding="utf-8") as import_lines:
         count = 0
         for line in import_lines:
@@ -157,11 +160,16 @@ def create_data_objects():
                 weaviate_import_object[2]
             )
             # if batch has size of 1k add them
-            if count % 250 == 0:
+            if count % BATCH_SIZE == 0:
                 try:
                     CLIENT.batch.create_objects()
                 except:
-                    logger.info("Something went wrong with th batch")
+                    logger.info("Something went wrong with the batch")
+                    BATCH_SIZE = BATCH_SIZE / 2
+                    if BATCH_SIZE < 10:
+                        BATCH_SIZE = 10
+                    time.sleep(10)
+                    logger.info("New batch size = " + str(BATCH_SIZE))
                     pass
                 logger.info("Imported: " + str(count) + " items")
         # add last in batch
@@ -171,6 +179,7 @@ def create_data_objects():
 logger.info("Start import")
 # wiki data file
 WIKI_DATA_FILE = "wikidata_translation_v1.tsv"
+BATCH_SIZE = 10000
 # connect Weaviate
 CLIENT = weaviate.Client("http://localhost:8080")
 # create schema

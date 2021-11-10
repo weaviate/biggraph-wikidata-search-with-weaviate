@@ -9,7 +9,7 @@ services:
     - '8080'
     - --scheme
     - http
-    image: semitechnologies/weaviate:1.7.2
+    image: semitechnologies/weaviate:1.8.0-rc.3
     ports:
     - 8080:8080
     restart: on-failure:0
@@ -22,4 +22,5 @@ services:
       DEFAULT_VECTORIZER_MODULE: 'none'
       ENABLE_MODULES: ''
       CLUSTER_HOSTNAME: 'node1'
+      # LOG_LEVEL: 'debug'
 ...
