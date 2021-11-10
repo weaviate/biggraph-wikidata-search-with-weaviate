@@ -38,8 +38,7 @@ Note:
 * [Import](#import)
     * [Import using Python from source](#import-using-python-from-source)
     * [Restore as Weaviate backup](#restore-as-weaviate-backup)
-* [Example query](#example-query)
-* [Video](#video)
+* [Example queries](#example-queries)
 
 ## Import
 
@@ -70,6 +69,8 @@ Note:
 You can download a backup and restore it. **This is by far the fastest way to get the dataset up and running ⁉️**
 
 ```sh
+# clone this repository
+$ git clone https://github.com/semi-technologies/biggraph-wikidata-search-with-weaviate
 # download the Weaviate backup
 $ curl https://storage.googleapis.com/semi-technologies-public-data/weaviate-1.8.0-rc.2-backup-wikipedia-pytorch-biggraph.tar.gz -O
 # untar the backup (125G unpacked)
@@ -89,7 +90,7 @@ Notes:
 * Weaviate needs some time to restore the backup, in the docker logs, you can see the status of the import. For more verbose information regarding the import. Add `LOG_LEVEL: 'debug'` in `docker-compose.yml`
 * This setup is tested with `Ubuntu 20.04.3 LTS` and the Weaviate version in the Docker-compose file attached
 
-## Example query
+## Example queries
 
 [Finding Stanley](http://console.semi.technology/console/query#weaviate_uri=http://biggraph-wikidata-in-weaviate.api.vectors.network:8080&graphql_query=%23%23%0A%23%20The%20one%20and%20only%20Stanley%20Kubrick%20%F0%9F%9A%80%E2%AC%9B%F0%9F%90%92%0A%23%23%0A%7B%0A%20%20Get%20%7B%0A%20%20%20%20Entity(%0A%20%20%20%20%20%20nearObject%3A%20%7Bid%3A%20%227392bc9d-a3c0-4738-9d25-a473245971c5%22%2C%20certainty%3A%200.75%7D%0A%20%20%20%20%20%20limit%3A%2024%0A%20%20%20%20)%20%7B%0A%20%20%20%20%20%20url%0A%20%20%20%20%20%20_additional%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20certainty%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20Label(nearObject%3A%20%7Bid%3A%20%227392bc9d-a3c0-4738-9d25-a473245971c5%22%2C%20certainty%3A%200.8%7D)%20%7B%0A%20%20%20%20%20%20content%0A%20%20%20%20%20%20language%0A%20%20%20%20%20%20_additional%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20certainty%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A)
 
@@ -143,7 +144,3 @@ Notes:
   }
 }
 ```
-
-## Video
-
-[VIDEO]
