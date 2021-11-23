@@ -56,3 +56,21 @@ body {
     font-size: 3.5rem;
     }
 }
+
+.autocomplete {
+    position: fixed;
+    width: 100px;
+    background-color: #FFF;
+    box-shadow: 5px 10px #888888;
+    display: none;
+}
+
+.autocomplete_a {
+    padding-left: 1rem;
+    margin-top: 0rem;
+    margin-bottom: -1rem;
+}
+
+#search-bar {
+    width: 300px;
+}

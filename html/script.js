@@ -169,7 +169,8 @@ var showContent = function(results, similaritySearchQuery){
     sorted = sorted.sort(function(a, b) { return b - a;});
     $.each(sorted, function(s){
         $.each(results, function (i) {
-            if(results[i]["certainty"] === sorted[s]){
+            if(results[i]["certainty"] === sorted[s] && typeof(results[i]["label"]) != "undefined"  && results[i]["label"] != "heading"){
+                console.log(results[i]["label"]);
                 var certainty = results[i]["certainty"] * 100;
                 var box = $("#first-result").clone();
                 box.removeAttr("id");
@@ -206,7 +207,7 @@ var makeEntryGraphqlQuery = function(q) {
 
 var makeSimilarityGraphqlQuery = function(q) {
     return {
-        "query": '{ Get { Entity( nearObject: { id: "' + q + '" certainty: 0.75 } limit: 24) { url _additional { id certainty } } Label( nearObject: { id: "' + q + '" certainty: 0.8 } ) { content language _additional { id certainty } } } }',
+        "query": '{ Get { Entity( nearObject: { id: "' + q + '" certainty: 0.25 } limit: 24) { url _additional { id certainty } } Label( nearObject: { id: "' + q + '" certainty: 0.25 } ) { content language _additional { id certainty } } } }',
         "variables":null
     }
 }
@@ -337,14 +338,41 @@ var doSearch = function(q){
     });
 }
 
-function handleLoader(text){
+var handleLoader = function(text){
     $("#loader").show();
     $("#loader").find(".loader-info").text(text);
+}
+
+var replaceAndSearch = function(q){
+    $(".autocomplete").hide();
+    $("#search-bar").val(q)
+    doSearch($("#search-bar").val());
+}
+
+var request;
+var getQCode = function(query){
+    if (typeof(request) != "undefined"){
+        request.abort();
+    }
+    request = $.get("https://us-central1-semi-production.cloudfunctions.net/wikidata-search?q=" + query, function(result){
+        var c = 0;
+        $(".autocomplete").html("");
+        while(c < result.search.length){
+            $(".autocomplete").append('<div class="autocomplete_a"><a href="#" onclick="replaceAndSearch(\'' + result.search[c].id + '\')">' + result.search[c].label + '</a></div><br>');
+            c+=1;
+        }
+    })
+    $(".autocomplete").show();
+    var offset = $("#search-bar").offset();
+    $(".autocomplete").css("left", offset.left);
+    $(".autocomplete").css("top", offset.top + 37);
+    $(".autocomplete").css("width", $("#search-bar").width());
 }
 
 $(document).ready(function() {
     $("#loader").hide();
     $("#exec-search").click(function(e){
+        $(".autocomplete").hide();
         doSearch($("#search-bar").val());
         e.preventDefault();
     });
@@ -352,6 +380,11 @@ $(document).ready(function() {
         if (e.which == 13) {
             e.preventDefault();
             doSearch($("#search-bar").val());
+        } else {
+            getQCode($("#search-bar").val());
         }
+    })
+    $("html, body").click(function(){
+        $(".autocomplete").hide();
     })
 });
