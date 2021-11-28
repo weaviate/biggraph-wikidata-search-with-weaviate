@@ -8,12 +8,12 @@ If you like what you see, a ⭐ on the [Weaviate Github repo](https://github.com
 
 Additional links:
 
-* [🔥 Live Demo HTML front-end](http://biggraph-wikidata-in-weaviate.vectors.network/)
-* [🔥 Live Demo Weaviate GraphQL front-end](http://console.semi.technology/console/query#weaviate_uri=http://biggraph-wikidata-in-weaviate.api.vectors.network:8080&graphql_query=%23%23%0A%23%20The%20one%20and%20only%20Stanley%20Kubrick%20%F0%9F%9A%80%E2%AC%9B%F0%9F%90%92%0A%23%23%0A%7B%0A%20%20Get%20%7B%0A%20%20%20%20Entity(%0A%20%20%20%20%20%20nearObject%3A%20%7Bid%3A%20%227392bc9d-a3c0-4738-9d25-a473245971c5%22%2C%20certainty%3A%200.75%7D%0A%20%20%20%20%20%20limit%3A%2024%0A%20%20%20%20)%20%7B%0A%20%20%20%20%20%20url%0A%20%20%20%20%20%20_additional%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20certainty%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20Label(nearObject%3A%20%7Bid%3A%20%227392bc9d-a3c0-4738-9d25-a473245971c5%22%2C%20certainty%3A%200.8%7D)%20%7B%0A%20%20%20%20%20%20content%0A%20%20%20%20%20%20language%0A%20%20%20%20%20%20_additional%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20certainty%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A)
-* [🔥 Live Demo Weaviate RESTful Endpoint](http://biggraph-wikidata-in-weaviate.api.vectors.network:8080/v1/schema)
+* [💡 Live Demo HTML front-end](http://biggraph-wikidata-in-weaviate.vectors.network/)
+* [💡 Live Demo Weaviate GraphQL front-end](http://console.semi.technology/console/query#weaviate_uri=http://biggraph-wikidata-in-weaviate.api.vectors.network:8080&graphql_query=%23%23%0A%23%20The%20one%20and%20only%20Stanley%20Kubrick%20%F0%9F%9A%80%E2%AC%9B%F0%9F%90%92%0A%23%23%0A%7B%0A%20%20Get%20%7B%0A%20%20%20%20Entity(%0A%20%20%20%20%20%20nearObject%3A%20%7Bid%3A%20%227392bc9d-a3c0-4738-9d25-a473245971c5%22%2C%20certainty%3A%200.75%7D%0A%20%20%20%20%20%20limit%3A%2024%0A%20%20%20%20)%20%7B%0A%20%20%20%20%20%20url%0A%20%20%20%20%20%20_additional%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20certainty%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20Label(nearObject%3A%20%7Bid%3A%20%227392bc9d-a3c0-4738-9d25-a473245971c5%22%2C%20certainty%3A%200.8%7D)%20%7B%0A%20%20%20%20%20%20content%0A%20%20%20%20%20%20language%0A%20%20%20%20%20%20_additional%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20certainty%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A)
+* [💡 Live Demo Weaviate RESTful Endpoint](http://biggraph-wikidata-in-weaviate.api.vectors.network:8080/v1/schema)
 * [Weaviate documentation](https://www.semi.technology/developers/weaviate/current/)
 * [Weaviate on Github](https://github.com/semi-technologies/weaviate)
-* Complete english language WikiPedia vectorized in Weaviate (similar project – coming soon!)
+* [Complete english language WikiPedia vectorized in Weaviate (similar project)](https://github.com/semi-technologies/semantic-search-through-wikipedia-with-weaviate)
 
 ### Acknowledgments
 
